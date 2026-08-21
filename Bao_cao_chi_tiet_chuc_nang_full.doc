@@ -1,0 +1,753 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <title>Báo cáo Chi tiết các chức năng - SmartBorrowApp</title>
+  <meta charset="utf-8">
+  <!--[if gte mso 9]>
+  <xml>
+    <w:WordDocument>
+      <w:View>Print</w:View>
+      <w:Zoom>100</w:Zoom>
+      <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+  </xml>
+  <![endif]-->
+  <style>
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 13pt;
+      line-height: 1.6;
+      color: #333333;
+      margin: 1in;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 18pt;
+      color: #0F4C81;
+      border-bottom: 2px solid #0F4C81;
+      padding-bottom: 5px;
+      margin-top: 24pt;
+      margin-bottom: 12pt;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15pt;
+      color: #1F6F8B;
+      margin-top: 18pt;
+      margin-bottom: 9pt;
+    }
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13pt;
+      color: #2E8A99;
+      margin-top: 12pt;
+      margin-bottom: 6pt;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 6pt;
+      text-align: justify;
+    }
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 6pt;
+      padding-left: 20pt;
+    }
+    li {
+      margin-bottom: 4pt;
+      text-align: justify;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10pt;
+      margin-bottom: 10pt;
+    }
+    table, th, td {
+      border: 1px solid #CCCCCC;
+    }
+    th {
+      background-color: #F2F2F2;
+      font-weight: bold;
+      padding: 8px;
+      text-align: left;
+    }
+    td {
+      padding: 8px;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11pt;
+      background-color: #F5F5F5;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    pre {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 10.5pt;
+      background-color: #F8F9FA;
+      border: 1px solid #E9ECEF;
+      padding: 10px;
+      margin-top: 10pt;
+      margin-bottom: 10pt;
+      white-space: pre-wrap;
+    }
+    .note {
+      background-color: #F4F6F9;
+      border-left: 5px solid #17A2B8;
+      padding: 10px;
+      margin-top: 10pt;
+      margin-bottom: 10pt;
+      font-style: italic;
+    }
+    .db-schema {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #F1F3F5;
+      border: 1px dashed #6C757D;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>II. CHI TIẾT CÁC CHỨC NĂNG</h1>
+
+  <!-- ==================== CHỨC NĂNG 1 ==================== -->
+  <h2>1. Chức năng/giao diện 1: Chức năng Đăng nhập / Đăng ký</h2>
+  
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Hệ thống cung cấp hai giao diện chính để người dùng xác thực tài khoản:
+  </p>
+  <ul>
+    <li>
+      <b>Giao diện Đăng nhập (LoginPage):</b> Cho phép sinh viên đăng nhập vào ứng dụng bằng tài khoản Email và Mật khẩu. Nhằm tạo sự thuận lợi trong quá trình kiểm thử, ứng dụng đã điền sẵn một tài khoản sinh viên mặc định (<code>sv@gmail.com</code> / <code>123</code>). Thông tin người dùng nhập sẽ được đối chiếu cục bộ với cơ sở dữ liệu. Nếu chính xác, hệ thống hiển thị thông báo thành công (SnackBar) và chuyển tiếp tới Trang chủ. Ngược lại, nếu sai thông tin hoặc tài khoản không tồn tại, màn hình sẽ thông báo lỗi tương ứng.
+    </li>
+    <li>
+      <b>Giao diện Đăng ký (RegisterPage):</b> Cho phép sinh viên chưa có tài khoản tiến hành tạo mới. Người dùng cần nhập đầy đủ thông tin: Họ tên, Email, Mật khẩu và Xác nhận lại mật khẩu. Hệ thống sẽ tiến hành kiểm tra tính khớp của mật khẩu xác nhận và kiểm tra sự tồn tại của Email trong cơ sở dữ liệu. Nếu hợp lệ, một bản ghi người dùng mới sẽ được chèn vào cơ sở dữ liệu với vai trò mặc định là học viên/sinh viên (<code>student</code>).
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình giao diện Đăng nhập & Đăng ký trên điện thoại/máy ảo và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget thông thường: <code>Scaffold</code> (khung màn hình), <code>AppBar</code> (thanh tiêu đề), <code>Center</code> (căn giữa nội dung), <code>SingleChildScrollView</code> (cuộn trang tránh tràn màn hình khi hiện bàn phím), <code>Card</code> (khung thẻ bo góc nổi bật), <code>Padding</code> (tạo khoảng đệm), <code>Column</code> (xếp hàng dọc), <code>Icon</code> (biểu tượng khóa, hòm thư), <code>Text</code> (hiển thị nhãn văn bản), <code>TextField</code> (ô nhập liệu), <code>ElevatedButton</code> (nút bấm chính dạng nổi), <code>TextButton</code> (nút chuyển đổi dạng chữ), <code>SizedBox</code> (tạo khoảng cách), và <code>CircularProgressIndicator</code> (vòng xoay chờ khi đăng nhập).</li>
+        <li>Widget đặc biệt: <code>TextEditingController</code> để thu thập dữ liệu nhập vào của các trường và <code>ScaffoldMessenger.of(context).showSnackBar()</code> để hiển thị các thông báo nhanh trên giao diện.</li>
+      </ul>
+    </li>
+    
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>provider</code>: Cung cấp giải pháp truy xuất trạng thái phiên đăng nhập thông qua lớp <code>AuthProvider</code>.</li>
+        <li><code>go_router</code>: Đảm nhận điều hướng, chuyển đổi màn hình động như chuyển sang trang đăng ký (<code>context.push('/register')</code>) hoặc chuyển sang trang chủ sau khi xác thực thành công (<code>context.go('/home')</code>).</li>
+        <li><code>uuid</code>: Dùng để sinh tự động mã định danh ngẫu nhiên không trùng lặp (UUID v4) làm khóa chính (ID) cho sinh viên mới khi lưu vào CSDL SQLite.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Ứng dụng sử dụng gói thư viện <b>Provider</b> kết hợp với lớp <code>AuthProvider</code> kế thừa <code>ChangeNotifier</code>. Khi đăng nhập thành công hoặc cập nhật thông tin cá nhân, biến toàn cục <code>_currentUser</code> lưu trữ đối tượng sinh viên hiện tại sẽ được gán và gọi hàm <code>notifyListeners()</code> để cập nhật lại toàn bộ UI các màn hình con có quan sát.</li>
+        <li><b>Kiến trúc code:</b> Áp dụng mô hình thiết kế <b>MVVM (Model-View-ViewModel)</b> giúp phân tách rõ ràng giao diện và logic:
+          <ul>
+            <li><i>Model:</i> Lớp <code>User</code> đại diện cho bảng người dùng.</li>
+            <li><i>View:</i> <code>LoginPage</code> và <code>RegisterPage</code> thiết kế giao diện, thu nhận tương tác người dùng.</li>
+            <li><i>ViewModel:</i> <code>AuthProvider</code> làm trung gian tiếp nhận dữ liệu từ View, gọi các hàm truy vấn từ tầng dịch vụ cơ sở dữ liệu và thông báo thay đổi trạng thái về lại View.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Ứng dụng thực hiện đọc và ghi dữ liệu hoàn toàn <b>cục bộ (Local Storage)</b> thông qua hệ quản trị cơ sở dữ liệu <b>SQLite</b> (thư viện <code>sqflite</code>).</p>
+      <p>Cấu trúc bảng dữ liệu <code>users</code> trong CSDL cục bộ:</p>
+      <pre class="db-schema">
+CREATE TABLE users (
+  id TEXT PRIMARY KEY,     -- Khóa chính (UUID v4)
+  name TEXT NOT NULL,      -- Họ tên người dùng
+  email TEXT NOT NULL,     -- Email tài khoản đăng nhập (độc nhất)
+  password TEXT NOT NULL,  -- Mật khẩu
+  role TEXT NOT NULL       -- Vai trò hệ thống ('student' hoặc 'admin')
+)</pre>
+      <p>Mô tả API/Phương thức nghiệp vụ cục bộ trong lớp <code>DatabaseHelper</code>:</p>
+      <ul>
+        <li>Phương thức đăng nhập: <code>Future&lt;User?&gt; authenticate(String email, String password)</code> gọi lệnh SQL query bảng <code>users</code> theo điều kiện <code>where: 'email = ? AND password = ?'</code>. Đầu vào là chuỗi email và mật khẩu; Đầu ra là đối tượng <code>User</code> nếu khớp dữ liệu hoặc <code>null</code> nếu sai thông tin.</li>
+        <li>Phương thức đăng ký: <code>Future&lt;bool&gt; registerUser(User user)</code> thực hiện kiểm tra email trùng lặp trước, sau đó chèn (<code>insert</code>) bản ghi <code>User</code> mới vào SQLite. Đầu vào là thực thể <code>User</code>; Đầu ra trả về giá trị <code>true</code> (thành công) hoặc <code>false</code> (thất bại do trùng email).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 2 ==================== -->
+  <h2>2. Chức năng/giao diện 2: Trang chủ - Danh sách thiết bị & Tìm kiếm/Lọc</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Màn hình Trang chủ (<code>HomePage</code>) là trung tâm tương tác của ứng dụng sau khi đăng nhập. Giao diện được thiết kế hiện đại gồm các phần chính:
+  </p>
+  <ul>
+    <li>
+      <b>Lời chào cá nhân hóa:</b> Hiển thị lời chào thân thiện kèm tên chính xác của sinh viên đang đăng nhập lấy từ phiên làm việc (Ví dụ: "Xin chào, Sinh viên A!").
+    </li>
+    <li>
+      <b>Khu vực Thiết bị mới:</b> Hiển thị danh sách trượt theo chiều ngang (Horizontal List) chứa những thiết bị có thuộc tính <code>isNew = 1</code>, giúp sinh viên cập nhật các thiết bị công nghệ giáo dục mới được trang bị.
+    </li>
+    <li>
+      <b>Khu vực Tất cả thiết bị:</b> Hiển thị lưới hình ảnh 2 cột (Grid View) của tất cả thiết bị trong trường. Mỗi thẻ thiết bị hiển thị: Hình ảnh mô tả thiết bị, tên, phân loại danh mục, và nhãn trạng thái trực quan: chữ màu xanh lá cây <b>"Có sẵn"</b> nếu trạng thái là <code>available</code> hoặc chữ màu đỏ <b>"Đã mượn"</b> nếu trạng thái là <code>borrowed</code>.
+    </li>
+    <li>
+      <b>Chức năng vuốt để làm mới (Pull-to-refresh):</b> Hỗ trợ cập nhật ngay tức thì danh sách thiết bị từ database cục bộ.
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình giao diện Trang chủ trên điện thoại/máy ảo và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget thông thường: <code>Scaffold</code>, <code>AppBar</code>, <code>IconButton</code>, <code>Icon</code>, <code>SingleChildScrollView</code>, <code>Column</code>, <code>Padding</code>, <code>Text</code>, <code>SizedBox</code>, <code>Card</code>, <code>InkWell</code> (nhận diện chạm mở trang chi tiết và tạo hiệu ứng nhấp nháy đẹp mắt), <code>Container</code>.</li>
+        <li>Widget đặc biệt:
+          <ul>
+            <li><code>RefreshIndicator</code>: Bao bọc vùng nội dung để thực hiện cơ chế vuốt từ trên xuống cập nhật lại danh sách thiết bị.</li>
+            <li><code>ListView.builder</code> (với <code>scrollDirection: Axis.horizontal</code>): Dùng để thiết kế danh sách cuộn ngang cho mục "Thiết bị mới".</li>
+            <li><code>GridView.builder</code> (kết hợp <code>SliverGridDelegateWithFixedCrossAxisCount</code>): Dựng lưới danh sách 2 cột hiển thị cân đối.</li>
+            <li><code>ClipRRect</code>: Dùng để bo góc hình ảnh thiết bị phía trên cùng của Card cho đồng bộ với thiết kế.</li>
+            <li><code>loadingBuilder</code> và <code>errorBuilder</code> của <code>Image.network</code>: Tăng cường trải nghiệm bằng cách hiển thị vòng quay loading hoặc hiển thị ảnh lỗi mặc định nếu thiết bị mất kết nối internet không tải được hình ảnh từ URL.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>provider</code>: Kết nối và đọc dữ liệu thiết bị từ <code>DeviceProvider</code> và thông tin người dùng từ <code>AuthProvider</code>.</li>
+        <li><code>go_router</code>: Điều hướng sang trang Giỏ mượn (<code>context.go('/cart')</code>) hoặc trang Chi tiết của thiết bị tương ứng (<code>context.push('/device/${device.id}')</code>).</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Sử dụng <b>Provider</b> qua lớp <code>DeviceProvider</code> kế thừa <code>ChangeNotifier</code>. Khi màn hình khởi chạy ở phương thức <code>initState()</code>, ứng dụng gọi lệnh <code>DeviceProvider.fetchDevices()</code> không đồng bộ. Khi dữ liệu được tải từ SQLite vào bộ nhớ tạm của Provider, hàm <code>notifyListeners()</code> kích hoạt để thông báo cho màn hình Trang chủ tự vẽ lại giao diện chứa đầy đủ danh sách thiết bị.</li>
+        <li>Kiến trúc MVVM phân tách: View (<code>HomePage</code>) chỉ hiển thị dữ liệu từ ViewModel (<code>DeviceProvider</code>), trong khi ViewModel phụ trách tương tác với SQLite thông qua tầng Service (<code>DatabaseHelper</code>).</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Dữ liệu thiết bị được đọc cục bộ từ cơ sở dữ liệu SQLite trong bảng <code>devices</code>.</p>
+      <p>Cấu trúc bảng dữ liệu <code>devices</code>:</p>
+      <pre class="db-schema">
+CREATE TABLE devices (
+  id TEXT PRIMARY KEY,       -- ID thiết bị
+  name TEXT NOT NULL,        -- Tên thiết bị học tập
+  description TEXT NOT NULL, -- Mô tả thông số thiết bị
+  category TEXT NOT NULL,    -- Phân loại (Máy chiếu, Âm thanh, Máy tính, v.v.)
+  imageUrl TEXT NOT NULL,    -- Link ảnh thiết bị online
+  status TEXT NOT NULL,      -- Trạng thái: 'available' (Có sẵn), 'borrowed' (Đã mượn)
+  isNew INTEGER NOT NULL     -- Gắn cờ thiết bị mới (1: Đúng, 0: Sai)
+)</pre>
+      <p>Phương thức truy vấn cục bộ: Hàm <code>Future&lt;List&lt;Device&gt;&gt; getAllDevices()</code> truy xuất toàn bộ danh sách thiết bị có trong bảng <code>devices</code>.</p>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 3 ==================== -->
+  <h2>3. Chức năng/giao diện 3: Xem chi tiết thiết bị</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Giao diện Chi tiết thiết bị (<code>DeviceDetailPage</code>) mở ra khi sinh viên nhấn chọn một thiết bị cụ thể ở màn hình Trang chủ. Giao diện được thiết kế tập trung vào thông tin trực quan:
+  </p>
+  <ul>
+    <li>
+      <b>Ảnh tiêu đề lớn:</b> Hiển thị hình ảnh thiết bị rõ nét dạng biểu ngữ ở phần đầu màn hình.
+    </li>
+    <li>
+      <b>Thông tin cơ bản:</b> Tên thiết bị hiển thị in đậm kích thước lớn, danh mục thiết bị đặt lịch thiệp trong thẻ bo góc (Chip) màu xanh nhạt, nhãn trạng thái hiển thị màu xanh ("Có sẵn") hoặc màu đỏ ("Đã mượn") rất dễ nhận diện.
+    </li>
+    <li>
+      <b>Mô tả thiết bị:</b> Trình bày chi tiết thông số kỹ thuật, hướng dẫn sử dụng hoặc ghi chú về thiết bị giúp sinh viên hiểu rõ tính năng.
+    </li>
+    <li>
+      <b>Nút hành động mượn:</b> Nút <b>"Thêm vào giỏ mượn"</b> màu xanh lam nổi bật nằm ở thanh điều hướng chân trang (Bottom Navigation Bar). Nút này sẽ tự động bị vô hiệu hóa (disabled) nếu thiết bị đó hiện đã có người khác mượn (trạng thái khác <code>available</code>).
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình giao diện Chi tiết thiết bị trên điện thoại/máy ảo và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget thông thường: <code>Scaffold</code>, <code>AppBar</code>, <code>IconButton</code> (nút quay lại <code>Icons.arrow_back</code>), <code>SingleChildScrollView</code>, <code>Column</code>, <code>Padding</code>, <code>Text</code>, <code>SizedBox</code>, <code>Row</code>, <code>Chip</code> (thẻ phân loại), <code>ElevatedButton</code>, <code>SafeArea</code> (tránh tràn viền nút bấm trên các thiết bị tai thỏ).</li>
+        <li>Widget đặc biệt: <code>Hero</code> bao bọc widget ảnh, có thuộc tính <code>tag: 'device_image_${device.id}'</code> giúp đồng bộ ảnh giữa màn hình trang chủ và màn hình chi tiết, tạo hiệu ứng chuyển tiếp ảnh bay mượt mà đầy nghệ thuật.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>provider</code>: Dùng để truy cập <code>CartProvider</code> để gọi phương thức thêm thiết bị hiện tại vào giỏ hàng.</li>
+        <li><code>go_router</code>: Đọc tham số ID thiết bị từ thanh địa chỉ động (<code>state.pathParameters['id']</code>) và hỗ trợ nhấn quay lại trang chủ bằng <code>context.pop()</code>.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Sử dụng <b>Provider</b> (<code>CartProvider</code>). Khi sinh viên nhấn nút mượn, ứng dụng gọi phương thức <code>cartProvider.addItem(device)</code>. Hành động này đẩy dữ liệu thiết bị vào map của giỏ mượn toàn ứng dụng và thực hiện gọi <code>notifyListeners()</code> để cập nhật số lượng thiết bị hiển thị trong giỏ ở các màn hình khác. Sau khi thêm, hiển thị SnackBar thông báo thành công và gọi <code>context.pop()</code> quay lại Trang chủ.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Đọc dữ liệu chi tiết của thiết bị hiện tại thông qua ID từ danh sách thiết bị lưu trữ cục bộ trong SQLite. Trạng thái thiết bị được lưu trữ trong bảng <code>devices</code> như mô tả ở Chức năng 2.</p>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 4 ==================== -->
+  <h2>4. Chức năng/giao diện 4: Giỏ mượn thiết bị và Đăng ký mượn thiết bị</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Giao diện Giỏ mượn thiết bị (<code>CartPage</code>) hoạt động tương tự như một giỏ hàng mua sắm, nhưng dành riêng cho mục đích đăng ký mượn thiết bị học tập.
+  </p>
+  <ul>
+    <li>
+      <b>Danh sách thiết bị đã chọn:</b> Liệt kê dạng thẻ các thiết bị mà sinh viên đã chọn mượn tạm thời từ trang chi tiết. Cho phép xem nhanh ảnh nhỏ, tên thiết bị và danh mục.
+    </li>
+    <li>
+      <b>Xóa thiết bị khỏi giỏ:</b> Sinh viên có thể dễ dàng loại bỏ một thiết bị đã chọn nhầm bằng cách nhấn vào biểu tượng thùng rác màu đỏ ở góc phải mỗi thẻ thiết bị.
+    </li>
+    <li>
+      <b>Thanh xác nhận dưới đáy (Checkout Bar):</b> Hiển thị tổng số lượng thiết bị đang đăng ký mượn và một nút bấm chính kích thước lớn mang nhãn <b>"Xác nhận mượn"</b>.
+    </li>
+    <li>
+      <b>Xử lý tạo phiếu mượn tự động:</b> Khi sinh viên xác nhận mượn, hệ thống tự động lập phiếu mượn tương ứng cho từng thiết bị trong giỏ, cập nhật trạng thái thiết bị sang "Đã mượn", giải phóng giỏ hàng về trạng thái trống, và gửi ngay một thông báo đẩy chúc mừng thành công lên điện thoại người dùng.
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình giao diện Giỏ mượn thiết bị trên điện thoại/máy ảo và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget thông thường: <code>Scaffold</code>, <code>AppBar</code>, <code>Center</code>, <code>Text</code>, <code>Column</code>, <code>Expanded</code> (giúp danh sách co giãn tối đa), <code>ListView.builder</code> (dựng danh sách thiết bị), <code>Card</code>, <code>ListTile</code> (bố cục dòng thiết bị gọn gàng), <code>Image.network</code>, <code>IconButton</code> (thùng rác), <code>Container</code>, <code>SafeArea</code>, <code>Row</code>, <code>ElevatedButton</code>.</li>
+        <li>Widget đặc biệt: Sử dụng thuộc tính <code>BoxShadow</code> bên trong lớp trang trí <code>BoxDecoration</code> để tạo phần viền bóng mờ nhẹ phía trên thanh xác nhận mượn dưới đáy màn hình, giúp phân biệt rõ vùng nội dung cuộn và vùng nút bấm cố định.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>provider</code>: Đóng vai trò cực kỳ quan trọng giúp giao tiếp chéo giữa các ViewModels: <code>CartProvider</code> (lấy thiết bị, làm sạch giỏ), <code>BorrowProvider</code> (lưu phiếu mượn vào SQLite), <code>DeviceProvider</code> (cập nhật trạng thái thiết bị sang đã mượn trên trang chủ), và <code>AuthProvider</code> (lấy ID sinh viên hiện tại làm thông tin người mượn).</li>
+        <li><code>flutter_local_notifications</code>: Tạo và phát đi thông báo đẩy cục bộ trên điện thoại thông báo giao dịch mượn thiết bị hoàn tất thông qua lớp <code>NotificationService</code>.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Sử dụng <b>Provider</b> để quản lý trạng thái đồng bộ toàn bộ ứng dụng. Khi nhấn "Xác nhận mượn", vòng lặp sẽ duyệt qua các thiết bị trong giỏ, khởi tạo thực thể <code>BorrowRecord</code> mới, gọi hàm ghi nhận của <code>BorrowProvider</code> để ghi vào SQLite cục bộ, đồng thời gửi lệnh đến <code>DeviceProvider</code> để đổi trạng thái thiết bị thành <code>'borrowed'</code>. Cuối cùng gọi <code>cartProvider.clear()</code> để dọn dẹp giỏ mượn và thông báo thay đổi cho toàn bộ UI.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Sau khi xác nhận mượn, hệ thống ghi bản ghi mới vào bảng <code>borrow_records</code> trong CSDL SQLite cục bộ:</p>
+      <pre class="db-schema">
+CREATE TABLE borrow_records (
+  id TEXT PRIMARY KEY,       -- ID phiếu mượn (Thời gian dạng milisecond)
+  userId TEXT NOT NULL,      -- Khóa ngoại liên kết bảng users (id)
+  deviceId TEXT NOT NULL,    -- Khóa ngoại liên kết bảng devices (id)
+  borrowDate TEXT NOT NULL,  -- Ngày giờ mượn thiết bị (chuỗi ISO8601)
+  dueDate TEXT NOT NULL,     -- Hạn trả thiết bị (Thời gian mượn + 7 ngày)
+  returnDate TEXT NOT NULL,  -- Ngày giờ trả thực tế (Mặc định ban đầu là "")
+  status TEXT NOT NULL,      -- Trạng thái phiếu: 'approved', 'returned'
+  FOREIGN KEY (userId) REFERENCES users (id),
+  FOREIGN KEY (deviceId) REFERENCES devices (id)
+)</pre>
+      <p>Cập nhật trạng thái bảng <code>devices</code>: Trường <code>status</code> của thiết bị mượn sẽ được cập nhật thành <code>'borrowed'</code> để ngăn chặn sinh viên khác tiếp tục mượn.</p>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 5 ==================== -->
+  <h2>5. Chức năng/giao diện 5: Xem lịch sử mượn trả và trạng thái phiếu mượn</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Giao diện Lịch sử mượn trả (<code>HistoryPage</code>) giúp sinh viên theo dõi toàn bộ quá trình mượn thiết bị của mình.
+  </p>
+  <ul>
+    <li>
+      <b>Danh sách phiếu mượn lịch sử:</b> Liệt kê tất cả các thiết bị sinh viên đang mượn hoặc đã trả. Mỗi thẻ phiếu mượn cung cấp: Ảnh thiết bị, tên, danh mục, ngày giờ mượn, hạn trả theo quy định và ngày trả thực tế (nếu đã trả).
+    </li>
+    <li>
+      <b>Trạng thái màu sắc động thời gian thực (Status Tag):</b> Nhãn trạng thái được tính toán tự động dựa trên khoảng cách thời gian từ lúc xem đến hạn trả và hiển thị dưới dạng thẻ màu sắc (Chip):
+      <ul>
+        <li><i>Đang mượn (Màu xanh lá):</i> Vẫn trong thời hạn trả an toàn.</li>
+        <li><i>Sắp quá hạn (Màu vàng sẫm):</i> Đến gần hạn trả (còn 1 ngày).</li>
+        <li><i>Hạn cuối trả (Màu cam):</i> Phải trả trong ngày hôm nay.</li>
+        <li><i>Quá hạn (Màu đỏ):</i> Đã vượt quá hạn quy định nhưng chưa trả thiết bị.</li>
+        <li><i>Đã trả (Màu xanh dương):</i> Thiết bị đã được hoàn trả thành công.</li>
+      </ul>
+    </li>
+    <li>
+      <b>Nút Trả thiết bị nhanh:</b> Đối với các thiết bị chưa hoàn trả (trạng thái khác Đã trả), màn hình hiển thị nút <b>"Trả"</b> bên cạnh nhãn trạng thái. Nhấn nút này sẽ cập nhật ngay ngày trả thực tế và giải phóng thiết bị về trạng thái có sẵn.
+    </li>
+    <li>
+      <b>Thông báo đẩy nhắc nhở tự động:</b> Ứng dụng tích hợp bộ đếm giờ tự động chạy ngầm. Khi phát hiện phiếu mượn chuyển sang trạng thái Sắp quá hạn, Hạn cuối trả, hoặc Quá hạn, hệ thống sẽ tự động phát thông báo đẩy lên điện thoại sinh viên để nhắc nhở hoàn trả thiết bị kịp thời.
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình giao diện Lịch sử mượn trả & Thông báo nhắc nhở trên điện thoại/máy ảo và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget thông thường: <code>Scaffold</code>, <code>AppBar</code>, <code>Center</code>, <code>CircularProgressIndicator</code>, <code>ListView.builder</code>, <code>Card</code>, <code>Padding</code>, <code>Row</code>, <code>ClipRRect</code>, <code>Image.network</code>, <code>Expanded</code>, <code>Column</code>, <code>Text</code>, <code>SizedBox</code>, <code>Chip</code>, <code>ElevatedButton</code>.</li>
+        <li>Widget đặc biệt:
+          <ul>
+            <li><code>FutureBuilder&lt;Device?&gt;</code>: Do bảng phiếu mượn chỉ lưu khóa ngoại <code>deviceId</code>, widget này hỗ trợ tải không đồng bộ thông tin của từng thiết bị tương ứng từ database SQLite để hiển thị lên thẻ dòng lịch sử mà không làm đơ giao diện chính.</li>
+            <li><code>Timer</code> (từ thư viện <code>dart:async</code>): Khởi tạo bộ đếm giờ chạy định kỳ mỗi 1 giây để gọi <code>setState(() {})</code> cập nhật lại giao diện thời gian thực cho các nhãn trạng thái.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>provider</code>: Truy cập <code>BorrowProvider</code> quản lý các phiếu mượn và cập nhật hành động trả, <code>AuthProvider</code> định danh tài khoản sinh viên.</li>
+        <li><code>intl</code>: Định dạng thời gian hiển thị bằng lớp <code>DateFormat</code> theo chuẩn dễ đọc <code>'dd/MM/yyyy HH:mm:ss'</code>.</li>
+        <li><code>flutter_local_notifications</code>: Gửi thông báo cục bộ tới điện thoại để cảnh báo khi đến hạn hoặc quá hạn thiết bị.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Trạng thái phiếu mượn được quản lý tập trung trong <code>BorrowProvider</code>. Khi người dùng nhấn nút "Trả", ViewModel sẽ gọi phương thức <code>returnDevice()</code> của lớp CSDL SQLite, cập nhật lại trạng thái dòng dữ liệu phiếu mượn và cập nhật trạng thái thiết bị sang khả dụng. Sau đó, <code>fetchUserRecords()</code> được gọi để làm mới danh sách trong Provider, kích hoạt cập nhật lại toàn bộ giao diện lịch sử mượn của sinh viên.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Đọc dữ liệu phiếu mượn từ bảng <code>borrow_records</code> của sinh viên theo điều kiện khóa ngoại <code>userId</code>.</p>
+      <p>Khi sinh viên nhấn nút **Trả**, hệ thống thực hiện cập nhật CSDL cục bộ thông qua hai câu lệnh:</p>
+      <ul>
+        <li>Cập nhật bảng <code>borrow_records</code>: Cập nhật trường <code>status = 'returned'</code> và điền thông tin <code>returnDate = [Thời gian hiện tại]</code> của bản ghi có ID tương ứng.</li>
+        <li>Cập nhật bảng <code>devices</code>: Cập nhật trường <code>status = 'available'</code> cho ID thiết bị được trả để đưa thiết bị trở lại trạng thái sẵn sàng cho người dùng tiếp theo.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 6 ==================== -->
+  <h2>6. Chức năng/giao diện 6: Quản lý danh sách thiết bị (Quyền Admin)</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Giao diện Quản lý thiết bị (<code>AdminDevicePage</code>) là chức năng đặc quyền dành riêng cho quản trị viên thiết bị nhà trường (Admin), có thể truy cập thông qua nút cấu hình trong trang Hồ sơ cá nhân của tài khoản Admin.
+  </p>
+  <ul>
+    <li>
+      <b>Danh sách quản lý thiết bị:</b> Liệt kê danh sách toàn bộ thiết bị trong kho của trường dưới dạng các dòng ListTile gọn gàng kèm theo ảnh thu nhỏ đại diện, tên, danh mục và trạng thái mượn hiện thời.
+    </li>
+    <li>
+      <b>Nút hành động sửa đổi:</b> Nút <b>Sửa (Bút màu xanh lam)</b> mở hộp thoại sửa đổi thông tin thiết bị đang có; Nút <b>Xóa (Thùng rác màu đỏ)</b> kích hoạt hộp thoại cảnh báo để xóa vĩnh viễn thiết bị ra khỏi cơ sở dữ liệu hệ thống.
+    </li>
+    <li>
+      <b>Nút thêm thiết bị mới:</b> Nút hành động nổi ở góc màn hình (Floating Action Button dấu cộng) mở hộp thoại biểu mẫu thêm mới thiết bị.
+    </li>
+    <li>
+      <b>Biểu mẫu Thêm/Sửa thiết bị:</b> Cho phép nhập Tên thiết bị, Danh mục phân loại, Mô tả tính năng, URL hình ảnh thiết bị, lựa chọn Trạng thái khả dụng (Có sẵn, Không có sẵn, Đã mượn) và công tắc gạt xác định xem đây có phải là thiết bị mới trang bị hay không. Nhấn Lưu để ghi nhận thay đổi trực tiếp vào database.
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình giao diện Quản lý thiết bị của Admin & Hộp thoại Thêm/Sửa thiết bị trên điện thoại/máy ảo và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget thông thường: <code>Scaffold</code>, <code>AppBar</code>, <code>FloatingActionButton</code>, <code>ListView.builder</code>, <code>ListTile</code>, <code>Image.network</code>, <code>IconButton</code>, <code>Row</code>, <code>AlertDialog</code>, <code>TextButton</code>, <code>ElevatedButton</code>, <code>SingleChildScrollView</code>, <code>TextField</code>, <code>DropdownButtonFormField</code>, <code>SwitchListTile</code>, <code>SnackBar</code>.</li>
+        <li>Widget đặc biệt: Sử dụng <code>StatefulBuilder</code> bọc quanh vùng nội dung bên trong phương thức dựng hộp thoại <code>showDialog</code>. Điều này cho phép quản lý và thay đổi trạng thái tương tác cục bộ của các widget nhập liệu như <code>DropdownButtonFormField</code> và <code>SwitchListTile</code> mà không cần phải thực hiện vẽ lại (rebuild) toàn bộ trang danh sách Admin phía sau, giúp ứng dụng hoạt động vô cùng mượt mà.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>provider</code>: Gọi các hàm CRUD nghiệp vụ trực tiếp từ <code>DeviceProvider</code> để cập nhật danh sách thiết bị dùng chung toàn cục.</li>
+        <li><code>uuid</code>: Dùng sinh mã định danh ngẫu nhiên (UUID v4) làm ID cho thiết bị mới khi Admin tạo mới.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Trạng thái danh sách được quản lý thông qua lớp <code>DeviceProvider</code> kết hợp với cơ chế thông báo thay đổi của <code>ChangeNotifier</code>. Khi quản trị viên thực hiện lưu thiết bị mới, sửa thiết bị cũ hoặc xóa thiết bị, ViewModel sẽ gọi hàm ghi nhận xuống CSDL SQLite cục bộ, đồng thời thực hiện cập nhật lại mảng dữ liệu thiết bị trong bộ nhớ của Provider và kích hoạt hàm <code>notifyListeners()</code> để giao diện người quản trị lẫn giao diện trang chủ của học viên tự động phản ánh đúng dữ liệu mới nhất.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Hệ thống thực hiện đầy đủ các thao tác <b>CRUD</b> xuống bảng dữ liệu <code>devices</code> cục bộ trong SQLite:</p>
+      <ul>
+        <li><b>Create (Thêm mới):</b> Chèn bản ghi thiết bị mới có ID vừa tạo từ thư viện UUID vào bảng <code>devices</code> thông qua lệnh <code>DatabaseHelper.instance.createDevice(newDevice)</code>.</li>
+        <li><b>Read (Đọc):</b> Truy xuất danh sách thiết bị đang có để hiển thị bằng phương thức <code>DatabaseHelper.instance.getAllDevices()</code>.</li>
+        <li><b>Update (Cập nhật):</b> Áp dụng các thay đổi từ biểu mẫu của Admin xuống bản ghi thiết bị cũ dựa theo khóa chính ID qua lệnh <code>DatabaseHelper.instance.updateDevice(device)</code>.</li>
+        <li><b>Delete (Xóa):</b> Thực thi lệnh xóa dòng dữ liệu thiết bị khỏi bảng bằng phương thức <code>DatabaseHelper.instance.deleteDevice(id)</code>.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 7 ==================== -->
+  <h2>7. Chức năng/giao diện 7: Trang cá nhân và Quản lý tài khoản (Hồ sơ sinh viên)</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Chức năng này giúp sinh viên quản lý hồ sơ cá nhân và tăng tính bảo mật của tài khoản:
+  </p>
+  <ul>
+    <li>
+      <b>Xem thông tin cá nhân (ProfilePage):</b> Hiển thị đầy đủ thông tin của sinh viên đang đăng nhập, bao gồm Ảnh đại diện Avatar, Họ tên, và Email cá nhân.
+    </li>
+    <li>
+      <b>Chỉnh sửa thông tin cá nhân (ProfileEditPage):</b> Sinh viên có thể cập nhật thông tin Họ tên và Email của mình. Khi nhấn lưu, hệ thống sẽ thực hiện cập nhật xuống cơ sở dữ liệu.
+    </li>
+    <li>
+      <b>Thay đổi mật khẩu (ChangePasswordPage):</b> Cho phép sinh viên đổi mật khẩu bảo mật. Form bao gồm: Nhập mật khẩu cũ, mật khẩu mới, xác nhận lại mật khẩu mới. Hộp thoại có biểu tượng con mắt giúp người dùng tùy chọn ẩn/hiển mật khẩu (obscureText toggle) vô cùng tiện lợi.
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình giao diện Trang cá nhân, Chỉnh sửa thông tin và Đổi mật khẩu trên điện thoại/máy ảo và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget thông thường: <code>Scaffold</code>, <code>AppBar</code>, <code>IconButton</code>, <code>SingleChildScrollView</code>, <code>Column</code>, <code>Padding</code>, <code>CircleAvatar</code>, <code>Text</code>, <code>Card</code>, <code>ListTile</code>, <code>ElevatedButton</code>, <code>TextField</code>, <code>InputDecoration</code>, <code>Icon</code> (<code>Icons.person</code>, <code>Icons.email</code>, <code>Icons.lock</code>, <code>Icons.lock_outline</code>, <code>Icons.lock_reset</code>).</li>
+        <li>Widget đặc biệt: <code>showModalBottomSheet</code> được sử dụng tại trang hồ sơ để hiển thị menu trượt dưới đáy màn hình, cung cấp các nút tắt đi tới trang Chỉnh sửa hồ sơ hoặc Đổi mật khẩu.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>provider</code>: Truy cập <code>AuthProvider</code> để lấy thực thể người dùng hiện tại và gọi các hàm cập nhật thông tin cá nhân, cập nhật mật khẩu.</li>
+        <li><code>go_router</code>: Đảm nhận điều hướng chuyển hướng sang các đường dẫn con như <code>/profile/edit</code>, <code>/profile/password</code>, hoặc chuyển hướng về <code>/login</code> khi bấm đăng xuất.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Sử dụng <b>Provider</b> (<code>AuthProvider</code>). Khi người dùng tiến hành lưu hồ sơ hoặc đổi mật khẩu thành công, ViewModel sẽ thực hiện cập nhật CSDL SQLite cục bộ thông qua DatabaseHelper, sau đó cập nhật lại biến lưu trữ người dùng hiện tại <code>_currentUser</code> trong Provider và kích hoạt <code>notifyListeners()</code> để cập nhật lại tên hiển thị tức thì trên cả Trang cá nhân và lời chào ngoài Trang chủ.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Dữ liệu được cập nhật trực tiếp xuống bảng <code>users</code> cục bộ trong SQLite:</p>
+      <ul>
+        <li>Cập nhật hồ sơ: Gọi phương thức <code>DatabaseHelper.instance.updateUser(user)</code> để cập nhật lại cột <code>name</code> và <code>email</code>.</li>
+        <li>Thay đổi mật khẩu: Gọi phương thức <code>DatabaseHelper.instance.changePassword(userId, newPassword)</code> để cập nhật cột <code>password</code> của dòng người dùng có ID tương ứng.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 8 ==================== -->
+  <h2>8. Chức năng/giao diện 8: Hệ thống thông báo đẩy cục bộ (Local Notifications)</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Ứng dụng được trang bị hệ thống Thông báo cục bộ để nâng cao tính tương tác và nhắc nhở sinh viên mượn/trả thiết bị học tập đúng hạn:
+  </p>
+  <ul>
+    <li>
+      <b>Thông báo giao dịch mượn/trả thành công:</b> Ngay khi sinh viên hoàn tất việc "Xác nhận mượn" hoặc nhấn nút "Trả" thiết bị, ứng dụng sẽ gửi đi một thông báo đẩy tức thì lên thanh trạng thái điện thoại (Ví dụ: "Bạn đã mượn thành công 2 thiết bị", "Bạn đã trả máy chiếu Panasonic thành công").
+    </li>
+    <li>
+      <b>Thông báo cảnh báo đến hạn/quá hạn trả:</b> Hệ thống tự động theo dõi thời gian và đưa ra các cấp độ thông báo đẩy cảnh báo:
+      <ul>
+        <li><i>Cảnh báo sắp đến hạn trả:</i> Thông báo khi thiết bị còn lại 1 ngày đến hạn trả.</li>
+        <li><i>Cảnh báo hạn cuối trả:</i> Thông báo trong ngày cuối cùng của kỳ hạn trả.</li>
+        <li><i>Cảnh báo quá hạn:</i> Thông báo đẩy liên tục nhắc nhở khi thiết bị đã quá hạn mà chưa được trả.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên tự chụp ảnh màn hình thông báo của ứng dụng xuất hiện trên thanh trạng thái điện thoại và chèn vào đây]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Hệ thống thông báo đẩy là một dịch vụ ngầm (Background Service) hoạt động xuyên suốt, không có widget View hiển thị trực tiếp trên giao diện ứng dụng. Dịch vụ này tương tác trực tiếp với phần cứng thông báo của hệ điều hành thông qua lớp <code>NotificationService</code>.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>flutter_local_notifications</code>: Thư viện cốt lõi dùng để cấu hình cài đặt cho kênh thông báo Android (AndroidNotificationDetails) và iOS, khởi tạo các tham số về độ ưu tiên hiển thị (Importance.max, Priority.high) và gọi phương thức <code>_plugin.show()</code> để phát thông báo.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Lớp <code>NotificationService</code> được thiết kế theo mẫu thiết kế <b>Singleton Pattern</b> để đảm bảo chỉ có duy nhất một đối tượng quản lý thông báo trong suốt vòng đời ứng dụng. Dịch vụ được khởi tạo sẵn tại hàm <code>main()</code> của ứng dụng qua lệnh <code>await NotificationService().init()</code>. Khi các hành động mượn ở [cart_page.dart](file:///e:/PTUDDD/ct484h01project-BaoTran712-VoDangKhoa/lib/views/cart_page.dart) hoặc trả/quét hạn ở [history_page.dart](file:///e:/PTUDDD/ct484h01project-BaoTran712-VoDangKhoa/lib/views/history_page.dart) diễn ra, hệ thống chỉ cần gọi <code>NotificationService().show...()</code> để phát thông báo đẩy cục bộ.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Hệ thống không ghi dữ liệu trực tiếp từ dịch vụ thông báo, nhưng đọc thông tin ngày hạn trả và tên thiết bị từ bảng <code>borrow_records</code> và bảng <code>devices</code> trong SQLite cục bộ làm tham số hiển thị văn bản thông báo gửi đi.</p>
+    </li>
+  </ul>
+
+  <!-- ==================== CHỨC NĂNG 9 ==================== -->
+  <h2>9. Chức năng/giao diện 9: Chế độ kiểm thử nhanh thời gian thực (Fast Testing Mode)</h2>
+
+  <h3>- Miêu tả chức năng/giao diện:</h3>
+  <p>
+    Để phục vụ công tác kiểm thử (Testing & Demo), ứng dụng cung cấp chế độ kiểm thử nhanh giúp thay đổi quy mô tính toán thời gian hạn trả:
+  </p>
+  <ul>
+    <li>
+      Khi biến cờ <code>isTestMode</code> được đặt thành <code>true</code>, toàn bộ quy mô tính toán thời hạn trả thiết bị học tập sẽ được chuyển đổi từ **ngày** sang **giây**.
+    </li>
+    <li>
+      Hạn mượn thiết bị rút ngắn xuống còn 60 giây (thay vì 7 ngày như chế độ thật). Trạng thái phiếu mượn của sinh viên sẽ cập nhật tự động cực kỳ nhanh chóng: <i>Đang mượn</i> (trên 40 giây) -> <i>Sắp quá hạn</i> (20-40 giây) -> <i>Hạn cuối trả</i> (dưới 20 giây) -> <i>Quá hạn</i> (sau 60 giây).
+    </li>
+    <li>
+      Giúp người đánh giá dễ dàng thấy được logic chuyển đổi trạng thái màu sắc của thẻ nhãn và kiểm tra hoạt động của hệ thống thông báo cảnh báo quá hạn tức thì mà không cần chờ đợi nhiều ngày thực tế.
+    </li>
+  </ul>
+
+  <h3>- Ảnh chức năng/giao diện:</h3>
+  <p class="note">
+    [Sinh viên chụp ảnh màn hình trang Lịch sử mượn trả khi các trạng thái thay đổi nhanh chóng theo giây hoặc ảnh màn hình mã nguồn định nghĩa biến cờ isTestMode]
+  </p>
+
+  <h3>- Chi tiết cài đặt:</h3>
+  <ul>
+    <li>
+      <b>Liệt kê các widget sử dụng cho chức năng/giao diện:</b>
+      <ul>
+        <li>Widget tác động trực tiếp: Thẻ <code>Chip</code> trong màn hình lịch sử [history_page.dart](file:///e:/PTUDDD/ct484h01project-BaoTran712-VoDangKhoa/lib/views/history_page.dart), thay đổi màu sắc dựa trên kết quả tính toán của logic thời gian.</li>
+        <li>Bộ hẹn giờ <code>Timer.periodic(const Duration(seconds: 1), ...)</code> được kích hoạt tại phương thức <code>initState()</code> của màn hình lịch sử, thực hiện gọi <code>setState(() {})</code> mỗi giây để bắt buộc toàn bộ View vẽ lại để phản ánh đúng chênh lệch giây thời gian thực.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Các thư viện hay plugin sử dụng và vai trò:</b>
+      <ul>
+        <li><code>dart:async</code>: Cung cấp lớp <code>Timer</code> phục vụ tác vụ lặp định kỳ mỗi giây để cập nhật lại giao diện.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Giải pháp quản lý trạng thái chia sẻ và kiến trúc code:</b>
+      <ul>
+        <li>Toàn bộ logic tính toán được cô lập tại tệp cấu hình độc lập [borrow_status.dart](file:///e:/PTUDDD/ct484h01project-BaoTran712-VoDangKhoa/lib/views/borrow_status.dart) thông qua hàm tiện ích <code>getBorrowStatus()</code>. Việc thay đổi giá trị của hằng số <code>isTestMode = true/false</code> tại tệp này sẽ tác động ngay lập tức lên thuật toán tính trạng thái của toàn bộ hệ thống.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Đọc hoặc lưu trữ dữ liệu (Cấu trúc dữ liệu):</b>
+      <p>Logic đọc dữ liệu hạn trả <code>dueDate</code> từ SQLite, sử dụng phương thức so sánh thời gian thực: <code>dueDate.difference(DateTime.now()).inSeconds</code> để tính toán số giây còn lại và xếp loại trạng thái phiếu mượn tương ứng.</p>
+    </li>
+  </ul>
+
+  <!-- ==================== PHÂN CÔNG CÔNG VIỆC ==================== -->
+  <h2>III. BẢNG PHÂN CÔNG CÔNG VIỆC</h2>
+  <p>Dưới đây là bảng phân công công việc và đánh giá mức độ hoàn thành của các thành viên trong nhóm:</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">STT</th>
+        <th style="width: 25%;">Họ và Tên</th>
+        <th style="width: 15%;">MSSV</th>
+        <th style="width: 40%;">Nhiệm vụ được phân công</th>
+        <th style="width: 15%; text-align: center;">Mức độ hoàn thành</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;">1</td>
+        <td>Bảo Trân</td>
+        <td>[Điền MSSV 1]</td>
+        <td>
+          <ul>
+            <li>Thiết kế giao diện (UI/UX)</li>
+            <li>Chức năng Đăng nhập/Đăng ký</li>
+            <li>Chức năng Trang chủ, Chi tiết thiết bị</li>
+            <li>Chức năng Giỏ mượn, Đăng ký mượn</li>
+            <li>Hệ thống thông báo đẩy cục bộ</li>
+          </ul>
+        </td>
+        <td style="text-align: center;">100%</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">2</td>
+        <td>Võ Đăng Khoa</td>
+        <td>[Điền MSSV 2]</td>
+        <td>
+          <ul>
+            <li>Cấu hình CSDL SQLite</li>
+            <li>Chức năng Lịch sử mượn trả</li>
+            <li>Chức năng Quản lý danh sách thiết bị (Admin)</li>
+            <li>Chức năng Trang cá nhân và Quản lý tài khoản</li>
+            <li>Chế độ kiểm thử nhanh thời gian thực</li>
+          </ul>
+        </td>
+        <td style="text-align: center;">100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
